@@ -1,22 +1,20 @@
-export function PokemonsIndex({ pokemons }) {
-  if (!pokemons.id) {
-    return;
-  }
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
+
+export function PokemonsIndex({ pokemons, onShow }) {
+  // if (!pokemons || pokemons.length === 0) {
+  //   return <p>No Pokemons available</p>;
+  // }
   return (
     <div>
-      <h2>#{pokemons.id}</h2>
-      <h1>Pokemon: {pokemons.name}</h1>
-      <h3>Ability: {pokemons.abilities[0].ability.name}</h3>
-      <h3>Height: {pokemons.height / 10}m</h3>
-      <h3>Weight: {pokemons.weight / 10}kg</h3>
-      <ul>
-        <li>HP: {pokemons.stats[0].base_stat}</li>
-        <li>Attack: {pokemons["stats"][1]["base_stat"]}</li>
-        <li>Defense: {}</li>
-        <li>Special Attack: {}</li>
-        <li>Special Defense {}</li>
-        <li>Speed: {}</li>
-      </ul>
+      {pokemons.map((pokemon) => (
+        <div key={pokemon.id}>
+          <h2>#{pokemon.pokedex_number}</h2>
+          <AwesomeButton style={{ textTransform: "capitalize" }} type="primary" onPress={() => onShow(pokemon)}>
+            {pokemon.name}
+          </AwesomeButton>
+        </div>
+      ))}
     </div>
   );
 }
