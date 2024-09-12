@@ -1,7 +1,7 @@
 import axios from "axios";
 import { PokemonsPage } from "./PokemonsPage";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://pokedex-backend-dllz.onrender.com";
 
 function App() {
   return (
