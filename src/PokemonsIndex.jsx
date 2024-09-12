@@ -119,7 +119,7 @@ export function PokemonsIndex({ pokemons, version, onShow }) {
       <div className="bg-red-500 rounded-b-md pr-4 pb-2">
         <img className="p-2 pl-10 w-1/6 ml-auto" src={versionValues[version]?.url} />
       </div>
-      <div className="p-4 text-center grid grid-cols-6 gap-4">
+      <div className="p-4 text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
         {pokemons
           .filter((pokemon) => pokemon.id >= 1 && pokemon.id <= endIndex)
           .map((pokemon) => (
