@@ -116,11 +116,42 @@ export function PokemonsShow({ pokemon, version }) {
     ? versionValues[version]?.sprite || pokemon["sprites"]["other"]["official-artwork"]["front_default"]
     : pokemon["sprites"]["other"]["official-artwork"]["front_default"];
 
+  if (version) {
+    var orderedLevels = [];
+    pokemon["moves"].forEach(function (move) {
+      move["version_group_details"].forEach(function (level) {
+        if (level["move_learn_method"]["name"] === "level-up" && level["version_group"]["name"] === version) {
+          orderedLevels.push(level["level_learned_at"]);
+        }
+      });
+    });
+    orderedLevels = Array.from(new Set(orderedLevels)).sort((a, b) => a - b);
+    var moveTable = [];
+    orderedLevels.forEach(function (level) {
+      pokemon["moves"].forEach(function (move) {
+        move["version_group_details"].forEach(function (sMove) {
+          if (sMove["level_learned_at"] === level && sMove["version_group"]["name"] === version) {
+            moveTable.push(move["move"]["name"]);
+          }
+        });
+      });
+    });
+    var levelMove = [];
+    var index = 0;
+    while (index < orderedLevels.length) {
+      var level = orderedLevels[index];
+      var move = moveTable[index];
+      levelMove.push(level);
+      levelMove.push(move);
+      index = index + 1;
+    }
+  }
+
   return (
     <div>
       <h1># {pokemon.id}</h1>
       <h2 className="capitalize font-extrabold">{pokemon.name}</h2>
-      <img className="mx-auto w-32 h-32 object-cover" src={sprite} alt={`${pokemon.name} sprite`} />
+      <img className="mx-auto w-48 h-48 object-contain" src={sprite} alt={`${pokemon.name} sprite`} />
 
       {pokemon["types"][1] ? (
         <h3 className="capitalize">
@@ -153,8 +184,11 @@ export function PokemonsShow({ pokemon, version }) {
         <div>
           <h3 className="font-bold underline py-2">Move List</h3>
           <ul className="grid grid-cols-2 gap-0 text-xs p- border">
-            <li className="border p-0.5">level</li>
-            <li className="border p-0.5">move</li>
+            {levelMove.map((item) => (
+              <li key={item.id} className="border p-0.5">
+                {item}
+              </li>
+            ))}
           </ul>
           <h3 className="font-bold pb-2">(Version: {versionValues[version]?.display})</h3>
         </div>
@@ -162,31 +196,3 @@ export function PokemonsShow({ pokemon, version }) {
     </div>
   );
 }
-
-// puts
-// puts color.bold("Level-Up Move List:")
-// puts "(Version: #{version_choice})"
-// ordered_levels = []
-// data["moves"].each do |move|
-//   move["version_group_details"].each do |level|
-//     if level["move_learn_method"]["name"] == "level-up" && level["version_group"]["name"] == version
-//       ordered_levels << level["level_learned_at"]
-//     end
-//   end
-// end
-// ordered_levels = ordered_levels.uniq.sort
-
-// movetable = TTY::Table.new(header: ["Level", "Move"])
-// data["stats"].each do |stat|
-//   [stat["stat"]["name"], stat["base_stat"]]
-// end
-
-// ordered_levels.each do |level|
-//   data["moves"].each do |move|
-//     move["version_group_details"].each do |s_move|
-//       if s_move["level_learned_at"] == level && s_move["version_group"]["name"] == version
-//         movetable << [level, move["move"]["name"]]
-//       end
-//     end
-//   end
-// end
