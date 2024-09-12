@@ -41,7 +41,7 @@ export function Header() {
         </a>
       </button>
       <div>
-        <button onClick={toggleDropdown} className="text-right pr-4 pt-4 hover:opacity-85 hover:scale-105 w-1/3">
+        <button onClick={toggleDropdown} className="absolute right-0 pr-4 pt-4 hover:opacity-85 hover:scale-105 w-1/5">
           {/* <img
             src="https://fontmeme.com/permalink/240911/bef2ff728f0bbece5eb3752afb179893.png"
             // use yellow EFC100
@@ -55,7 +55,7 @@ export function Header() {
           />
         </button>
         {isOpen && (
-          <div className="absolute mt-2 w-56 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5">
+          <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5">
             {Object.keys(versions).map((version) => (
               <a
                 key={version}

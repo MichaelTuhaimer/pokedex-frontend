@@ -117,7 +117,7 @@ export function PokemonsIndex({ pokemons, version, onShow }) {
   return (
     <div>
       <div className="bg-red-500 rounded-b-md">
-        <img className="p-2 pl-10 w-1/6 mr-0" src={versionValues[version]?.url} />
+        <img className="p-2 pl-10 w-1/6 ml-auto" src={versionValues[version]?.url} />
       </div>
       <div className="p-4 text-center grid grid-cols-6 gap-4">
         {pokemons
