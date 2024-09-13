@@ -11,12 +11,15 @@ export function PokemonsPage() {
   const [currentPokemon, setCurrentPokemon] = useState({});
   const [version, setVersion] = useState("");
   const [page, setPage] = useState(0);
+  // const { currentPage, setCurrentPage } = useState("");
 
   useEffect(() => {
     const handleIndex = () => {
       let params = new URL(document.location.toString()).searchParams;
       let versionName = params.get("version");
       setVersion(versionName);
+      // params.get("page")
+      // setCurrentPage(pageNumber);
       axios.get(`/pokemons.json?page_number=${page}`).then((response) => {
         console.log(response.data);
         setPokemons(response.data);

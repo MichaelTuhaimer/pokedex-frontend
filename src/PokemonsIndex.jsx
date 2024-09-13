@@ -162,7 +162,7 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage }) {
       </div>
       <div className="bg-red-500 rounded-b-md p-2 pt-4">
         <div className="grid grid-cols-2 text">
-          {/* {page(currentPage) > 0 && ( */}
+          {/* {setPage > 0 && ( */}
           <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={setPage <= 0}>
             <img
               className="w-1/7 mr-auto transform hover:scale-105 hover:opacity-85"
@@ -172,10 +172,12 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage }) {
           {/* )} */}
           {/* {page(currentPage) = 10 && ( */}
           <button onClick={() => setPage((page) => Math.min(page + 1, pageIndex))} disabled={setPage >= pageIndex}>
+            {/* <a href={`?page=${setPage + 1}`}> */}
             <img
               className="w-1/7 ml-auto transform hover:scale-105 hover:opacity-85"
               src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"
             />
+            {/* </a> */}
           </button>
           {/* )} */}
         </div>
