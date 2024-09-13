@@ -4,115 +4,138 @@ export function PokemonsIndex({ pokemons, version, onShow, page }) {
       display: "Red and Blue",
       url: "https://fontmeme.com/permalink/240911/d415f636c947e504000ff6d73850f7ab.png",
       endIndex: 151,
+      pageIndex: 1,
     },
     yellow: {
       display: "Yellow",
       url: "https://fontmeme.com/permalink/240911/82132609c89109515b414f9034a86e9b.png",
       endIndex: 151,
+      pageIndex: 1,
     },
     "gold-silver": {
       display: "Gold and Silver",
       url: "https://fontmeme.com/permalink/240911/bfc8eeb0b981514343b2b4d4811bce76.png",
       endIndex: 251,
+      pageIndex: 2,
     },
     crystal: {
       display: "Crystal",
       url: "https://fontmeme.com/permalink/240911/fc3bc8213b46df8b31f448f68e72b935.png",
       endIndex: 251,
+      pageIndex: 2,
     },
     "ruby-sapphire": {
       display: "Ruby and Sapphire",
       url: "https://fontmeme.com/permalink/240911/5ce743a4f9650db601b55dee0a9e811c.png",
       endIndex: 386,
+      pageIndex: 4,
     },
     "firered-leafgreen": {
       display: "FireRed and LeafGreen",
       url: "https://fontmeme.com/permalink/240911/d46c43367387d316da9eff125f1b1968.png",
       endIndex: 386,
+      pageIndex: 4,
     },
     emerald: {
       display: "Emerald",
       url: "https://fontmeme.com/permalink/240911/d4eaefde5f31960f2c569af92f57881d.png",
       endIndex: 386,
+      pageIndex: 4,
     },
     colosseum: {
       display: "Colosseum",
       url: "https://fontmeme.com/permalink/240911/db23373cf1c8ecdad43edb7c4dd59fd7.png",
       endIndex: 386,
+      pageIndex: 4,
     },
     xd: {
       display: "XD: Gale of Darkness",
       url: "https://fontmeme.com/permalink/240911/64e228bd3f8bec4c19a706fa4c3fbe44.png",
       endIndex: 386,
+      pageIndex: 4,
     },
     "diamond-pearl": {
       display: "Diamond and Pearl",
       url: "https://fontmeme.com/permalink/240911/1f4b4156ae39a47b109ce32d1f1222a6.png",
       endIndex: 493,
+      pageIndex: 4,
     },
     platinum: {
       display: "Platinum",
       url: "https://fontmeme.com/permalink/240911/16800ed591efa85c6215cd40ba5e9e86.png",
       endIndex: 493,
+      pageIndex: 4,
     },
     "heartgold-soulsilver": {
       display: "HeartGold and SoulSilver",
       url: "https://fontmeme.com/permalink/240911/c5a41f0047e3dd602482911301c256ec.png",
       endIndex: 493,
+      pageIndex: 4,
     },
     "black-white": {
       display: "Black and White",
       url: "https://fontmeme.com/permalink/240911/cc41680a3fb61c63177df32e9365693a.png",
       endIndex: 649,
+      pageIndex: 6,
     },
     "black-2-white-2": {
       display: "Black 2 and White 2",
       url: "https://fontmeme.com/permalink/240911/868335b5b8ad95e352905f823e15911c.png",
       endIndex: 649,
+      pageIndex: 6,
     },
     "x-y": {
       display: "X and Y",
       url: "https://fontmeme.com/permalink/240911/aac9683d5769ab378a180a2f94d23cb4.png",
       endIndex: 721,
+      pageIndex: 7,
     },
     "omega-ruby-alpha-sapphire": {
       display: "Omega Ruby and Alpha Sapphire",
       url: "https://fontmeme.com/permalink/240911/2e00c7d1d879984a53bb57fad6f356d7.png",
       endIndex: 721,
+      pageIndex: 7,
     },
     "sun-moon": {
       display: "Sun and Moon",
       url: "https://fontmeme.com/permalink/240911/153aaa5b65860757b0fc5d8aad82f021.png",
       endIndex: 809,
+      pageIndex: 8,
     },
     "ultra-sun-ultra-moon": {
       display: "Ultra Sun and Ultra Moon",
       url: "https://fontmeme.com/permalink/240911/7feead6ce689fbd5dfb50f6c599fe11f.png",
       endIndex: 809,
+      pageIndex: 8,
     },
     "lets-go-pikachu-lets-go-eevee": {
       display: "Let's Go, Pikachu! and Let's Go, Eevee!",
       url: "https://fontmeme.com/permalink/240911/1e502833c8d4b34aaf5c896cdc8bea1f.png",
       endIndex: 809,
+      pageIndex: 8,
     },
     "sword-shield": {
       display: "Sword and Shield",
       url: "https://fontmeme.com/permalink/240911/53ca8a3ce482785b51166488e8549aaf.png",
       endIndex: 905,
+      pageIndex: 9,
     },
     "brilliant-diamond-and-shining-pearl": {
       display: "Brilliant Diamond and Shining Pearl",
       url: "https://fontmeme.com/permalink/240911/cad916cd725406f9f3dd30b4126015f3.png",
       endIndex: 905,
+      pageIndex: 9,
     },
     "scarlet-violet": {
       display: "Scarlet and Violet",
-      url: "https://fontmeme.com/permalink/240911/b60c0cef4bc4e23d6abd20cb424cc488.png",
+      url: "https://fontmeme.com/permalink/240913/b60c0cef4bc4e23d6abd20cb424cc488.png",
       endIndex: 1025,
+      pageIndex: 10,
     },
   };
 
   const endIndex = version ? versionValues[version]?.endIndex : 1025;
+  const pageIndex = version ? versionValues[version]?.pageIndex : 10;
 
   return (
     <div>
@@ -148,7 +171,10 @@ export function PokemonsIndex({ pokemons, version, onShow, page }) {
           </button>
           {/* )} */}
           {/* {page(currentPage) = 10 && ( */}
-          <button onClick={() => page((currentPage) => Math.min(currentPage + 1, 10))}>
+          <button
+            onClick={() => page((currentPage) => Math.min(currentPage + 1, pageIndex))}
+            disabled={page >= pageIndex}
+          >
             <img
               className="w-1/7 ml-auto transform hover:scale-105 hover:opacity-85"
               src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"
