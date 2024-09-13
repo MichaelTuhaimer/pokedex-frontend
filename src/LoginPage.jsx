@@ -44,6 +44,8 @@ export function LoginPage() {
             name="email"
             type="email"
           />{" "}
+        </div>
+        <div className="pb-2">
           or Username:{" "}
           <input
             className="text-slate-800 bg-blue-100 rounded shadow-xl transform opacity-85 hover:opacity-100"

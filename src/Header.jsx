@@ -1,8 +1,17 @@
 import { useState } from "react";
 
+import { LoginPage } from "./LoginPage";
+import { LogoutLink } from "./LogoutLink";
+import { SignupPage } from "./SignupPage";
+
 export function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const [isOpenV, setIsOpenV] = useState(false);
+  const [isOpenL, setIsOpenL] = useState(false);
+  const [isOpenS, setIsOpenS] = useState(false);
+  const toggleDropdownV = () => setIsOpenV(!isOpenV);
+  const toggleDropdownL = () => setIsOpenL(!isOpenL);
+  const toggleDropdownS = () => setIsOpenS(!isOpenS);
+  const jwt = localStorage.getItem("jwt");
 
   const versions = {
     "Red and Blue": "red-blue",
@@ -41,7 +50,7 @@ export function Header() {
         </a>
       </button>
       <div>
-        <button onClick={toggleDropdown} className="absolute right-0 pr-4 pt-4 hover:opacity-85 hover:scale-105 w-1/5">
+        <button onClick={toggleDropdownV} className="absolute right-0 pr-4 pt-4 hover:opacity-85 hover:scale-105 w-1/5">
           {/* <img
             src="https://fontmeme.com/permalink/240911/bef2ff728f0bbece5eb3752afb179893.png"
             // use yellow EFC100
@@ -54,13 +63,13 @@ export function Header() {
             border="0"
           />
         </button>
-        {isOpen && (
-          <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5">
+        {isOpenV && (
+          <div className="absolute top-10 right-0 mt-2 w-56 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5">
             {Object.keys(versions).map((version) => (
               <a
                 key={version}
                 href={`?version=${versions[version]}`}
-                onClick={() => setIsOpen(false)}
+                onClick={() => setIsOpenV(false)}
                 className="block px-4 py-2 text-slate-200 hover:bg-blue-300 hover:text-slate-800"
               >
                 {version}
@@ -69,6 +78,51 @@ export function Header() {
           </div>
         )}
       </div>
+      {!jwt && (
+        <div className="grid grid-cols-6">
+          <div className="pl-6 pt-4">
+            <button
+              onClick={() => {
+                toggleDropdownL();
+                if (isOpenS) {
+                  setIsOpenS(false);
+                }
+              }}
+              className="bg-blue-300 hover:bg-red-500 hover:text-slate-200 hover:scale-105 shadow-xl p-2 rounded-md text-slate-800 font-bold"
+            >
+              Login
+            </button>
+            {isOpenL && (
+              <div className="absolute left-0 mt-2 w-1/2 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5 pt-2">
+                <div className="bg-red-500 text-slate-200 pb-4">
+                  <LoginPage />
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="pl-4 pt-4">
+            <button
+              onClick={() => {
+                toggleDropdownS();
+                if (isOpenL) {
+                  setIsOpenL(false);
+                }
+              }}
+              className="bg-blue-300 hover:bg-red-500 hover:text-slate-200 hover:scale-105 shadow-xl p-2 rounded-md text-slate-800 font-bold"
+            >
+              Signup
+            </button>
+            {isOpenS && (
+              <div className="absolute left-0 mt-2 w-1/2 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5 pt-2">
+                <div className="bg-red-500 text-slate-200 pb-4">
+                  <SignupPage />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      <div className="text-slate-200 bg-red-500 text-left pr-4">{jwt && <LogoutLink />}</div>
     </div>
   );
 }

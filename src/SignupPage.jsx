@@ -22,7 +22,7 @@ export function SignupPage() {
   };
 
   return (
-    <div id="signup" className="text-left">
+    <div id="signup" className="text-left pl-4">
       <h1 className="underline font-bold pb-2">Signup</h1>
       <ul>
         {errors.map((error) => (
