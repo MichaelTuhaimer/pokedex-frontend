@@ -1,4 +1,4 @@
-export function PokemonsIndex({ pokemons, version, onShow, page }) {
+export function PokemonsIndex({ pokemons, version, onShow, setPage }) {
   const versionValues = {
     "red-blue": {
       display: "Red and Blue",
@@ -68,7 +68,7 @@ export function PokemonsIndex({ pokemons, version, onShow, page }) {
     },
     "heartgold-soulsilver": {
       display: "HeartGold and SoulSilver",
-      url: "https://fontmeme.com/permalink/240911/c5a41f0047e3dd602482911301c256ec.png",
+      url: "https://fontmeme.com/permalink/240913/c5a41f0047e3dd602482911301c256ec.png",
       endIndex: 493,
       pageIndex: 4,
     },
@@ -80,7 +80,7 @@ export function PokemonsIndex({ pokemons, version, onShow, page }) {
     },
     "black-2-white-2": {
       display: "Black 2 and White 2",
-      url: "https://fontmeme.com/permalink/240911/868335b5b8ad95e352905f823e15911c.png",
+      url: "https://fontmeme.com/permalink/240913/868335b5b8ad95e352905f823e15911c.png",
       endIndex: 649,
       pageIndex: 6,
     },
@@ -116,7 +116,7 @@ export function PokemonsIndex({ pokemons, version, onShow, page }) {
     },
     "sword-shield": {
       display: "Sword and Shield",
-      url: "https://fontmeme.com/permalink/240911/53ca8a3ce482785b51166488e8549aaf.png",
+      url: "https://fontmeme.com/permalink/240913/53ca8a3ce482785b51166488e8549aaf.png",
       endIndex: 905,
       pageIndex: 9,
     },
@@ -163,7 +163,7 @@ export function PokemonsIndex({ pokemons, version, onShow, page }) {
       <div className="bg-red-500 rounded-b-md p-2 pt-4">
         <div className="grid grid-cols-2 text">
           {/* {page(currentPage) > 0 && ( */}
-          <button onClick={() => page((currentPage) => Math.max(currentPage - 1, 0))} disabled={page <= 0}>
+          <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={setPage <= 0}>
             <img
               className="w-1/7 mr-auto transform hover:scale-105 hover:opacity-85"
               src="https://fontmeme.com/permalink/240913/4a3e3a08a4d79df77d890cb66b92990e.png"
@@ -171,10 +171,7 @@ export function PokemonsIndex({ pokemons, version, onShow, page }) {
           </button>
           {/* )} */}
           {/* {page(currentPage) = 10 && ( */}
-          <button
-            onClick={() => page((currentPage) => Math.min(currentPage + 1, pageIndex))}
-            disabled={page >= pageIndex}
-          >
+          <button onClick={() => setPage((page) => Math.min(page + 1, pageIndex))} disabled={setPage >= pageIndex}>
             <img
               className="w-1/7 ml-auto transform hover:scale-105 hover:opacity-85"
               src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"

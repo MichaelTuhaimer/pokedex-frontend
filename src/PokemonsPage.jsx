@@ -45,7 +45,7 @@ export function PokemonsPage() {
   return (
     <main className="bg-blue-300">
       <Header />
-      <PokemonsIndex pokemons={pokemons} version={version} onShow={handleShow} page={setPage} />
+      <PokemonsIndex pokemons={pokemons} version={version} onShow={handleShow} setPage={setPage} />
       <Modal show={isPokemonsShowVisible} onClose={handleClose}>
         <PokemonsShow pokemon={currentPokemon} version={version}></PokemonsShow>
       </Modal>
