@@ -112,6 +112,34 @@ export function PokemonsShow({ pokemon, version }) {
     },
   };
 
+  const types = {
+    normal: "/images/Type_Normal.png",
+    fire: "/images/Type_Fire.png",
+    water: "/images/Type_Water.png",
+    electric: "/images/Type_Electric.png",
+    grass: "/images/Type_Grass.png",
+    ice: "/images/Type_Ice.png",
+    fighting: "/images/Type_Fighting.png",
+    poison: "/images/Type_Poison.png",
+    ground: "/images/Type_Ground.png",
+    flying: "/images/Type_Flying.png",
+    psychic: "/images/Type_Psychic.png",
+    bug: "/images/Type_Bug.png",
+    rock: "/images/Type_Rock.png",
+    ghost: "/images/Type_Ghost.png",
+    dragon: "/images/Type_Dragon.png",
+    dark: "/images/Type_Dark.png",
+    steel: "/images/Type_Steel.png",
+    fairy: "/images/Type_Fairy.png",
+  };
+
+  if (pokemon["types"][1]) {
+    var type1 = types[pokemon["types"][0]["type"]["name"]];
+    var type2 = types[pokemon["types"][1]["type"]["name"]];
+  } else {
+    var type = types[pokemon["types"][0]["type"]["name"]];
+  }
+
   const sprite = version
     ? versionValues[version]?.sprite || pokemon["sprites"]["other"]["official-artwork"]["front_default"]
     : pokemon["sprites"]["other"]["official-artwork"]["front_default"];
@@ -154,11 +182,16 @@ export function PokemonsShow({ pokemon, version }) {
       <img className="mx-auto w-48 h-48 object-contain" src={sprite} alt={`${pokemon.name} sprite`} />
 
       {pokemon["types"][1] ? (
-        <h3 className="capitalize">
-          Type: {pokemon["types"][0]["type"]["name"]}, {pokemon["types"][1]["type"]["name"]}
-        </h3>
+        <div className="grid grid-cols-3">
+          <h3 className="text-right">Type:</h3>
+          <img className="uppercase pl-2" src={type1} alt={pokemon["types"][0]["type"]["name"]} />
+          <img className="uppercase" src={type2} alt={pokemon["types"][1]["type"]["name"]} />
+        </div>
       ) : (
-        <h3 className="capitalize">Type: {pokemon["types"][0]["type"]["name"]}</h3>
+        <div className="grid grid-cols-2">
+          <h3 className="pl-10">Type:</h3>
+          <img className="mr-auto uppercase" src={type} alt={pokemon["types"][0]["type"]["name"]} />
+        </div>
       )}
 
       <h3 style={{ textTransform: "capitalize" }}>Ability: {pokemon.abilities[0].ability.name}</h3>
