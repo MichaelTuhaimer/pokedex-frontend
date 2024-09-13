@@ -4,6 +4,9 @@ import { Header } from "./Header";
 import { PokemonsIndex } from "./PokemonsIndex";
 import { PokemonsShow } from "./PokemonsShow";
 import { Modal } from "./Modal";
+import { LoginPage } from "./LoginPage";
+import { LogoutLink } from "./LogoutLink";
+import { SignupPage } from "./SignupPage";
 
 export function PokemonsPage() {
   const [pokemons, setPokemons] = useState([]);
@@ -11,6 +14,8 @@ export function PokemonsPage() {
   const [currentPokemon, setCurrentPokemon] = useState({});
   const [version, setVersion] = useState("");
   const [page, setPage] = useState(0);
+  const jwt = localStorage.getItem("jwt");
+
   // const { currentPage, setCurrentPage } = useState("");
 
   useEffect(() => {
@@ -48,7 +53,12 @@ export function PokemonsPage() {
   return (
     <main className="bg-blue-300">
       <Header />
-      <PokemonsIndex pokemons={pokemons} version={version} onShow={handleShow} setPage={setPage} />
+      <div className="grid grid-cols-2 bg-red-500 text-slate-200">
+        {!jwt && <LoginPage />}
+        {!jwt && <SignupPage />}
+      </div>
+      <div className="text-slate-200 bg-red-500">{jwt && <LogoutLink />}</div>
+      <PokemonsIndex pokemons={pokemons} version={version} onShow={handleShow} setPage={setPage} page={page} />
       <Modal show={isPokemonsShowVisible} onClose={handleClose}>
         <PokemonsShow pokemon={currentPokemon} version={version}></PokemonsShow>
       </Modal>

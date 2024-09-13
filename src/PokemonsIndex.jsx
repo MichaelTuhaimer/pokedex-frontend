@@ -1,4 +1,4 @@
-export function PokemonsIndex({ pokemons, version, onShow, setPage }) {
+export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
   const versionValues = {
     "red-blue": {
       display: "Red and Blue",
@@ -149,7 +149,7 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage }) {
             <div key={pokemon.id} className="">
               <h2></h2>
               <button
-                className="bg-red-500 hover:bg-blue-300 hover:text-slate-800 hover:scale-105 shadow-xl p-2 rounded-md text-slate-200 capitalize"
+                className="bg-red-500 hover:bg-blue-300 hover:text-slate-800 hover:scale-105 shadow-xl p-2 rounded-md text-slate-200 capitalize w-32"
                 type="primary"
                 onClick={() => onShow(pokemon)}
               >
@@ -162,24 +162,30 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage }) {
       </div>
       <div className="bg-red-500 rounded-b-md p-2 pt-4">
         <div className="grid grid-cols-2 text">
-          {/* {setPage > 0 && ( */}
-          <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={setPage <= 0}>
-            <img
-              className="w-1/7 mr-auto transform hover:scale-105 hover:opacity-85"
-              src="https://fontmeme.com/permalink/240913/4a3e3a08a4d79df77d890cb66b92990e.png"
-            />
-          </button>
-          {/* )} */}
-          {/* {page(currentPage) = 10 && ( */}
-          <button onClick={() => setPage((page) => Math.min(page + 1, pageIndex))} disabled={setPage >= pageIndex}>
-            {/* <a href={`?page=${setPage + 1}`}> */}
-            <img
-              className="w-1/7 ml-auto transform hover:scale-105 hover:opacity-85"
-              src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"
-            />
-            {/* </a> */}
-          </button>
-          {/* )} */}
+          {/* 
+          x || => o
+          o || !=> o
+          o && => o
+          x && !=> o
+          */}
+
+          {page > 0 && (
+            <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={page <= 0}>
+              <img
+                className="w-1/7 mr-auto transform hover:scale-105 hover:opacity-85"
+                src="https://fontmeme.com/permalink/240913/4a3e3a08a4d79df77d890cb66b92990e.png"
+              />
+            </button>
+          )}
+          {page === 0 && <p></p>}
+          {page != pageIndex && (
+            <button onClick={() => setPage((page) => Math.min(page + 1, pageIndex))} disabled={page >= pageIndex}>
+              <img
+                className="w-1/7 ml-auto transform hover:scale-105 hover:opacity-85"
+                src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"
+              />
+            </button>
+          )}
         </div>
         <img className="p-2 pl-10 w-1/6 ml-auto pt-4" src={versionValues[version]?.url} />
       </div>
