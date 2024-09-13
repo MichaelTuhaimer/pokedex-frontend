@@ -1,4 +1,4 @@
-export function PokemonsIndex({ pokemons, version, onShow }) {
+export function PokemonsIndex({ pokemons, version, onShow, page }) {
   const versionValues = {
     "red-blue": {
       display: "Red and Blue",
@@ -136,6 +136,27 @@ export function PokemonsIndex({ pokemons, version, onShow }) {
               </button>
             </div>
           ))}
+      </div>
+      <div className="bg-red-500 rounded-b-md p-2 pt-4">
+        <div className="grid grid-cols-2 text">
+          {/* {page(currentPage) > 0 && ( */}
+          <button onClick={() => page((currentPage) => Math.max(currentPage - 1, 0))} disabled={page <= 0}>
+            <img
+              className="w-1/7 mr-auto transform hover:scale-105 hover:opacity-85"
+              src="https://fontmeme.com/permalink/240913/4a3e3a08a4d79df77d890cb66b92990e.png"
+            />
+          </button>
+          {/* )} */}
+          {/* {page(currentPage) = 10 && ( */}
+          <button onClick={() => page((currentPage) => Math.min(currentPage + 1, 10))}>
+            <img
+              className="w-1/7 ml-auto transform hover:scale-105 hover:opacity-85"
+              src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"
+            />
+          </button>
+          {/* )} */}
+        </div>
+        <img className="p-2 pl-10 w-1/6 ml-auto pt-4" src={versionValues[version]?.url} />
       </div>
     </div>
   );

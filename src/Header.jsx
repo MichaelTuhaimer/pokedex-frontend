@@ -36,7 +36,7 @@ export function Header() {
           <img
             src="https://ik.imagekit.io/hwyksvj4iv/pokedex_N_WgWrJK0s.png"
             alt=""
-            className="mx-5 py-2 w-1/2 transform hover:scale-105 hover:opacity-85"
+            className="mx-5 pb-2 pt-4 w-1/2 transform hover:scale-105 hover:opacity-85"
           />
         </a>
       </button>
