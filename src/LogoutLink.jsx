@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 export function LogoutLink() {
   const jwt = localStorage.getItem("jwt");
+  const [currentUser, setCurrentUser] = useState({});
 
   if (jwt) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
@@ -14,8 +16,20 @@ export function LogoutLink() {
     window.location.href = "/";
   };
 
+  const handleUser = () => {
+    axios.get("/users.json").then((response) => {
+      console.log(response.data);
+      setCurrentUser(response.data);
+    });
+  };
+
+  useEffect(() => {
+    handleUser();
+  }, []);
+
   return (
     <div className="pt-4 pl-6 pb-2">
+      <p className="py-2">User: {currentUser.username}</p>
       <a
         href="#"
         onClick={handleClick}

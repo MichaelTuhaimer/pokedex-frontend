@@ -160,7 +160,7 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
             </div>
           ))}
       </div>
-      <div className="bg-red-500 rounded-b-md p-2 pt-4">
+      <div className="bg-red-500 rounded-t-md p-2 pt-4">
         <div className="grid grid-cols-2 text">
           {/* 
           x || => o
