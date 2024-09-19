@@ -1,4 +1,34 @@
+import { useState } from "react";
+
 export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
+  const [isOpenV, setIsOpenV] = useState(false);
+  const toggleDropdownV = () => setIsOpenV(!isOpenV);
+
+  const versions = {
+    "Red and Blue": "red-blue",
+    Yellow: "yellow",
+    "Gold and Silver": "gold-silver",
+    Crystal: "crystal",
+    "Ruby and Sapphire": "ruby-sapphire",
+    "FireRed and LeafGreen": "firered-leafgreen",
+    Emerald: "emerald",
+    Colosseum: "colosseum",
+    "XD: Gale of Darkness": "xd",
+    "Diamond and Pearl": "diamond-pearl",
+    Platinum: "platinum",
+    "HeartGold and SoulSilver": "heartgold-soulsilver",
+    "Black and White": "black-white",
+    "Black 2 and White 2": "black-2-white-2",
+    "X and Y": "x-y",
+    "Omega Ruby and Alpha Sapphire": "omega-ruby-alpha-sapphire",
+    "Sun and Moon": "sun-moon",
+    "Ultra Sun and Ultra Moon": "ultra-sun-ultra-moon",
+    "Let's Go, Pikachu! and Let's Go, Eevee!": "lets-go-pikachu-lets-go-eevee",
+    "Sword and Shield": "sword-shield",
+    "Brilliant Diamond and Shining Pearl": "brilliant-diamond-and-shining-pearl",
+    "Scarlet and Violet": "scarlet-violet",
+  };
+
   const versionValues = {
     "red-blue": {
       display: "Red and Blue",
@@ -140,6 +170,35 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
   return (
     <div>
       <div className="bg-red-500 pr-4 pb-2">
+        <button onClick={toggleDropdownV} className="absolute right-0 pr-4 pt-4 hover:opacity-85 hover:scale-105 w-1/5">
+          {/* <img
+            src="https://fontmeme.com/permalink/240911/bef2ff728f0bbece5eb3752afb179893.png"
+            // use yellow EFC100
+            alt="pokemon-font"
+            border="0"
+          /> */}
+          <img
+            src="https://fontmeme.com/permalink/240911/1afd2ff91fbede10b428e1acc1daac80.png"
+            alt="pokemon-font"
+            border="0"
+          />
+        </button>
+        {isOpenV && (
+          <div className="absolute top-10 right-0 mt-2 w-56 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5">
+            {Object.keys(versions).map((version) => (
+              <a
+                key={version}
+                href={`?version=${versions[version]}`}
+                onClick={() => setIsOpenV(false)}
+                className="block px-4 py-2 text-slate-200 hover:bg-blue-300 hover:text-slate-800"
+              >
+                {version}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+      <div className="bg-red-500 pr-4 pb-2 pt-10">
         <img className="p-2 pl-10 w-1/6 ml-auto" src={versionValues[version]?.url} />
       </div>
       <div className="bg-red-500 rounded-b-md px-4 pb-4">
@@ -163,7 +222,7 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
           )}
         </div>
       </div>
-      <div className="p-4 text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+      <div className="flex-grow min-h-screen bg-blue-300 p-4 text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
         {pokemons
           .filter((pokemon) => pokemon.id >= 1 && pokemon.id <= endIndex)
           .map((pokemon) => (

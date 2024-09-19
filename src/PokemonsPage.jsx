@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Header } from "./Header";
 import { PokemonsIndex } from "./PokemonsIndex";
 import { PokemonsShow } from "./PokemonsShow";
 import { Modal } from "./Modal";
@@ -44,7 +43,6 @@ export function PokemonsPage() {
 
   return (
     <main className="bg-blue-300">
-      <Header />
       <PokemonsIndex pokemons={pokemons} version={version} onShow={handleShow} setPage={setPage} page={page} />
       <Modal show={isPokemonsShowVisible} onClose={handleClose}>
         <PokemonsShow pokemon={currentPokemon} version={version}></PokemonsShow>
