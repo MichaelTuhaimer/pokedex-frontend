@@ -142,7 +142,7 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
       <div className="bg-red-500 pr-4 pb-2">
         <img className="p-2 pl-10 w-1/6 ml-auto" src={versionValues[version]?.url} />
       </div>
-      <div className="bg-red-500 rounded-b-md px-2 pb-4">
+      <div className="bg-red-500 rounded-b-md px-4 pb-4">
         <div className="grid grid-cols-2 text">
           {page > 0 && (
             <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={page <= 0}>
@@ -181,7 +181,7 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
             </div>
           ))}
       </div>
-      <div className="bg-red-500 rounded-t-md p-2 pt-4">
+      <div className="bg-red-500 rounded-t-md p-2 pt-4 px-4">
         <div className="grid grid-cols-2 text">
           {page > 0 && (
             <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={page <= 0}>
