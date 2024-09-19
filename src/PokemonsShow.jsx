@@ -1,4 +1,22 @@
+import axios from "axios";
+import { useState } from "react";
+
 export function PokemonsShow({ pokemon, version }) {
+  const jwt = localStorage.getItem("jwt");
+  const [favorites, setFavorites] = useState([]);
+
+  if (jwt) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+  }
+
+  const handleCreate = (params, successCallback) => {
+    console.log("handleCreate", params);
+    axios.post(`/favorites.json`, { pokemon_id: params }).then((response) => {
+      setFavorites([...favorites, response.data]);
+      successCallback();
+    });
+  };
+
   const versionValues = {
     "red-blue": {
       display: "Red and Blue",
@@ -224,6 +242,16 @@ export function PokemonsShow({ pokemon, version }) {
             ))}
           </ul>
           <h3 className="font-bold pb-2">(Version: {versionValues[version]?.display})</h3>
+        </div>
+      )}
+      {jwt && (
+        <div className="pt-4">
+          <button
+            className="bg-blue-300 hover:bg-red-500 hover:text-slate-200 hover:scale-105 shadow-xl p-2 rounded-md text-slate-800 font-bold"
+            onClick={() => handleCreate(pokemon.id)}
+          >
+            Add favorite
+          </button>
         </div>
       )}
     </div>

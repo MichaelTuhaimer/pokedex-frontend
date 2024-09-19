@@ -89,7 +89,7 @@ export function UserPage() {
         <p className="w-1/3">
           <img src="https://fontmeme.com/permalink/240919/0c22a7f039a3fdc9509cb40c65397b7c.png" alt="" />
         </p>
-        <div className="flex-grow min-h-screen bg-blue-300 p-4 text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+        <div className="flex-grow bg-blue-300 p-4 text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
           {pokemons
             .filter((pokemon) => favorites.filter((favorite) => favorite.pokemon_id === pokemon.id)[0])
             .map((pokemon) => (
