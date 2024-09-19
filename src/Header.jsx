@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { LoginPage } from "./LoginPage";
-import { LogoutLink } from "./LogoutLink";
+import { UserPage } from "./UserPage";
 import { SignupPage } from "./SignupPage";
 
 export function Header() {
@@ -122,7 +122,7 @@ export function Header() {
           </div>
         </div>
       )}
-      <div className="text-slate-200 bg-red-500 text-left pr-4">{jwt && <LogoutLink />}</div>
+      <div className="text-slate-200 bg-red-500 text-left pr-4">{jwt && <UserPage />}</div>
     </div>
   );
 }

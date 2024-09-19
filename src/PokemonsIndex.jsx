@@ -139,8 +139,29 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
 
   return (
     <div>
-      <div className="bg-red-500 rounded-b-md pr-4 pb-2">
+      <div className="bg-red-500 pr-4 pb-2">
         <img className="p-2 pl-10 w-1/6 ml-auto" src={versionValues[version]?.url} />
+      </div>
+      <div className="bg-red-500 rounded-b-md px-2 pb-4">
+        <div className="grid grid-cols-2 text">
+          {page > 0 && (
+            <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={page <= 0}>
+              <img
+                className="w-1/12 mr-auto transform hover:scale-105 hover:opacity-85"
+                src="https://fontmeme.com/permalink/240913/4a3e3a08a4d79df77d890cb66b92990e.png"
+              />
+            </button>
+          )}
+          {page === 0 && <p></p>}
+          {page != pageIndex && (
+            <button onClick={() => setPage((page) => Math.min(page + 1, pageIndex))} disabled={page >= pageIndex}>
+              <img
+                className="w-1/12 ml-auto transform hover:scale-105 hover:opacity-85"
+                src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"
+              />
+            </button>
+          )}
+        </div>
       </div>
       <div className="p-4 text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
         {pokemons
@@ -162,17 +183,10 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
       </div>
       <div className="bg-red-500 rounded-t-md p-2 pt-4">
         <div className="grid grid-cols-2 text">
-          {/* 
-          x || => o
-          o || !=> o
-          o && => o
-          x && !=> o
-          */}
-
           {page > 0 && (
             <button onClick={() => setPage((page) => Math.max(page - 1, 0))} disabled={page <= 0}>
               <img
-                className="w-1/7 mr-auto transform hover:scale-105 hover:opacity-85"
+                className="w-1/12 mr-auto transform hover:scale-105 hover:opacity-85"
                 src="https://fontmeme.com/permalink/240913/4a3e3a08a4d79df77d890cb66b92990e.png"
               />
             </button>
@@ -181,7 +195,7 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
           {page != pageIndex && (
             <button onClick={() => setPage((page) => Math.min(page + 1, pageIndex))} disabled={page >= pageIndex}>
               <img
-                className="w-1/7 ml-auto transform hover:scale-105 hover:opacity-85"
+                className="w-1/12 ml-auto transform hover:scale-105 hover:opacity-85"
                 src="https://fontmeme.com/permalink/240913/fba27ede6ee4229d18566dc15876b3c7.png"
               />
             </button>
