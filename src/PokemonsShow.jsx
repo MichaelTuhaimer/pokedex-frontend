@@ -1,29 +1,10 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function PokemonsShow({ pokemon, version }) {
   const jwt = localStorage.getItem("jwt");
   const [favorites, setFavorites] = useState([]);
-
-  if (jwt) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
-  }
-
-  const handleCreate = (params, successCallback) => {
-    console.log("handleCreate", params);
-    axios.post(`/favorites.json`, { pokemon_id: params }).then((response) => {
-      setFavorites([...favorites, response.data]);
-      successCallback();
-    });
-  };
-
-  const handleDestroy = (pokemon_id) => {
-    console.log("handleDestroy", pokemon_id);
-    axios.delete(`/favorites/${pokemon_id}.json`).then(() => {
-      setFavorites(favorites.filter((pokemon) => pokemon.id !== pokemon_id));
-    });
-  };
-  // pokemons.filter((pokemon) => favorites.filter((favorite) => favorite.pokemon_id === pokemon.id)[0]
+  const [showFavorite, setShowFavorite] = useState(true);
 
   const versionValues = {
     "red-blue": {
@@ -159,6 +140,41 @@ export function PokemonsShow({ pokemon, version }) {
     fairy: "/images/Type_Fairy.png",
   };
 
+  useEffect(() => {
+    if (jwt) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+      axios
+        .get(`/favorites/${pokemon.id}.json`)
+        .then((response) => {
+          if (response.data) {
+            setShowFavorite(false);
+          } else {
+            setShowFavorite(true);
+          }
+        })
+        .catch(() => {
+          setShowFavorite(true);
+        });
+    }
+  }, [pokemon.id, jwt]);
+
+  const handleCreate = (params, successCallback) => {
+    console.log("handleCreate", params);
+    axios.post(`/favorites.json`, { pokemon_id: params }).then((response) => {
+      setFavorites([...favorites, response.data]);
+      successCallback();
+      setShowFavorite(false);
+    });
+  };
+
+  const handleDestroy = (pokemon_id) => {
+    console.log("handleDestroy", pokemon_id);
+    axios.delete(`/favorites/${pokemon_id}.json`).then(() => {
+      setFavorites(favorites.filter((pokemon) => pokemon.id !== pokemon_id));
+      setShowFavorite(true);
+    });
+  };
+
   if (pokemon["types"][1]) {
     var type1 = types[pokemon["types"][0]["type"]["name"]];
     var type2 = types[pokemon["types"][1]["type"]["name"]];
@@ -252,7 +268,7 @@ export function PokemonsShow({ pokemon, version }) {
           <h3 className="font-bold pb-2">(Version: {versionValues[version]?.display})</h3>
         </div>
       )}
-      {jwt && (
+      {jwt && showFavorite && (
         <div className="pt-4">
           <button
             className="bg-blue-300 hover:bg-red-500 hover:text-slate-200 hover:scale-105 shadow-xl p-2 rounded-md text-slate-800 font-bold"
@@ -262,7 +278,7 @@ export function PokemonsShow({ pokemon, version }) {
           </button>
         </div>
       )}
-      {jwt && (
+      {jwt && !showFavorite && (
         <div className="pt-4">
           <button
             className="bg-blue-300 hover:bg-red-500 hover:text-slate-200 hover:scale-105 shadow-xl p-2 rounded-md text-slate-800 font-bold"
