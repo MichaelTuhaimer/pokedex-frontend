@@ -17,12 +17,12 @@ export function PokemonsShow({ pokemon, version }) {
     });
   };
 
-  // const handleDestroy = (id) => {
-  //   console.log("handleDestroy", id);
-  //   axios.delete(`/favorites/${id}.json`).then(() => {
-  //     setFavorites(favorites.filter((pokemon) => favorites.id !== id));
-  //   });
-  // };
+  const handleDestroy = (pokemon_id) => {
+    console.log("handleDestroy", pokemon_id);
+    axios.delete(`/favorites/${pokemon_id}.json`).then(() => {
+      setFavorites(favorites.filter((pokemon) => pokemon.id !== pokemon_id));
+    });
+  };
   // pokemons.filter((pokemon) => favorites.filter((favorite) => favorite.pokemon_id === pokemon.id)[0]
 
   const versionValues = {
@@ -259,6 +259,16 @@ export function PokemonsShow({ pokemon, version }) {
             onClick={() => handleCreate(pokemon.id)}
           >
             Add favorite
+          </button>
+        </div>
+      )}
+      {jwt && (
+        <div className="pt-4">
+          <button
+            className="bg-blue-300 hover:bg-red-500 hover:text-slate-200 hover:scale-105 shadow-xl p-2 rounded-md text-slate-800 font-bold"
+            onClick={() => handleDestroy(pokemon.id)}
+          >
+            Remove favorite
           </button>
         </div>
       )}
