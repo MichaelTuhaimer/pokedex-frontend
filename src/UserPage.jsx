@@ -70,7 +70,7 @@ export function UserPage() {
   return (
     <div className="bg-red-500 text-slate-200">
       <div className="pt-4 pl-6 pb-4">
-        <p className="py-2 underline">User: {currentUser.username}</p>
+        <p className="py-2">User: {currentUser.username}</p>
         <button
           onClick={handleFavorite}
           className="bg-blue-300 hover:bg-red-500 hover:text-slate-200 hover:scale-105 shadow-xl p-2 rounded-md text-slate-800 font-bold mr-2"

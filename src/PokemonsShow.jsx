@@ -17,6 +17,14 @@ export function PokemonsShow({ pokemon, version }) {
     });
   };
 
+  // const handleDestroy = (id) => {
+  //   console.log("handleDestroy", id);
+  //   axios.delete(`/favorites/${id}.json`).then(() => {
+  //     setFavorites(favorites.filter((pokemon) => favorites.id !== id));
+  //   });
+  // };
+  // pokemons.filter((pokemon) => favorites.filter((favorite) => favorite.pokemon_id === pokemon.id)[0]
+
   const versionValues = {
     "red-blue": {
       display: "Red and Blue",

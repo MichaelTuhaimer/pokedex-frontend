@@ -14,7 +14,7 @@ export function Header() {
   return (
     <div className="bg-red-500 top-0 left-0 w-full z-50">
       <button>
-        <Link to="/">
+        <Link to="/" onClick={window.location.reload}>
           <img
             src="https://ik.imagekit.io/hwyksvj4iv/pokedex_N_WgWrJK0s.png"
             alt=""
@@ -38,7 +38,7 @@ export function Header() {
               Login
             </button>
             {isOpenL && (
-              <div className="absolute left-0 mt-2 w-1/2 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5 pt-2">
+              <div className="absolute left-0 mt-2 w-1/2 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5 pt-2 border">
                 <div className="bg-red-500 text-slate-200 pb-4">
                   <LoginPage />
                 </div>
@@ -58,7 +58,7 @@ export function Header() {
               Signup
             </button>
             {isOpenS && (
-              <div className="absolute left-0 mt-2 w-1/2 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5 pt-2">
+              <div className="absolute left-0 mt-2 w-1/2 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5 pt-2 border">
                 <div className="bg-red-500 text-slate-200 pb-4">
                   <SignupPage />
                 </div>

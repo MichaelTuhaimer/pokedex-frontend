@@ -184,13 +184,13 @@ export function PokemonsIndex({ pokemons, version, onShow, setPage, page }) {
           />
         </button>
         {isOpenV && (
-          <div className="absolute top-10 right-0 mt-2 w-56 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5">
+          <div className="absolute top-16 right-0 mt-48 w-56 rounded-md shadow-lg bg-red-500 ring-1 ring-black ring-opacity-5 border">
             {Object.keys(versions).map((version) => (
               <a
                 key={version}
                 href={`?version=${versions[version]}`}
                 onClick={() => setIsOpenV(false)}
-                className="block px-4 py-2 text-slate-200 hover:bg-blue-300 hover:text-slate-800"
+                className="block px-4 py-2 text-slate-200 hover:bg-blue-300 hover:text-slate-800 border"
               >
                 {version}
               </a>
